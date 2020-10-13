@@ -20,9 +20,9 @@ const FormCar = (props) => {
   const [error, setError] = useState(false);
 
   const validations = () => {
-    if (!modelo || !marca || !color || !patente) {
+    if (modelo === "" || marca === "" || color === "" || patente === "") {
       setError(true);
-      return null;
+      return false;
     }
     setTimeout(() => {
       window.location.href = "/";
@@ -39,8 +39,8 @@ const FormCar = (props) => {
 
   const addCar = (e) => {
     e.preventDefault();
-    validations();
-    if (!error) {
+    let validated = validations();
+    if (validated  !== false) {
       setDatosLs([...datosLs, car]);
       e.target.reset();
       addedCard();
@@ -53,8 +53,8 @@ const FormCar = (props) => {
   };
   const updateCar = (e) => {
     e.preventDefault();
-    validations();
-    if (!error) {
+    let validated  = validations();
+    if (validated  !== false) {
       setDatosLs([...datosLs.filter((posts) => posts.id !== car.id), car]);
       editedCard();
     }
